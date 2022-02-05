@@ -1,6 +1,6 @@
 import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "firebase/compat/auth";
+import "firebase/compat/firestore"; //for database
+import "firebase/compat/auth"; //for authentication
 
 const config = {
   apiKey: "AIzaSyCaH1uyCUxCjA2lhgQE2ZTRMElrzP3rgDA",
@@ -12,8 +12,7 @@ const config = {
   measurementId: "G-BWEPXX20NB",
 };
 
-firebase.initializeApp(config);
-
+firebase.initializeApp(config); //Initializing the app with the above config
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
@@ -39,11 +38,11 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
+export const auth = firebase.auth(); //assigning to const auth and exporting it to use in other parts of the app
+export const firestore = firebase.firestore(); //assigning to const firestore and exporting it to use in other parts of the app
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+const provider = new firebase.auth.GoogleAuthProvider(); //Gives access to Google Authentication class from the authentication library
+provider.setCustomParameters({ prompt: "select_account" }); //Triggers google pop up whenever we use this google auth provider for authentication and sign in
+export const signInWithGoogle = () => auth.signInWithPopup(provider); //provider is used for signing in with google
 
 export default firebase;
